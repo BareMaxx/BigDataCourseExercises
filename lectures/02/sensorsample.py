@@ -37,7 +37,7 @@ def fetchSample():
 	saveSample(sensorID, samplePayload)
 
 if __name__ == "__main__": 
-	while true:
+	while True:
 		if(time.time() - lastTime >= 2):
 			fetchSample()
 
