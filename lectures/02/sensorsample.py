@@ -32,7 +32,7 @@ def saveSample(sensorID, samplePayload):
 	hdfs_client.write("/data/raw/sensor_id={sample.payload}/temporal_aspect={sample.payload.temporal_aspect}/year={timeDate.tm_year}/month={timeDate.tm_month}/day={timeDate.tm_wday}/{sample.correlation_id}.json", sampleJSON, encoding="utf-8", overwrite=False)
 
 def fetchSample():
-	sensorID = random.randInt(1, 7)
+	sensorID = random.randint(1, 7)
 	samplePayload = float(decimal.Decimal(random.randrange(155, 389))/100)
 	saveSample(sensorID, samplePayload)
 
