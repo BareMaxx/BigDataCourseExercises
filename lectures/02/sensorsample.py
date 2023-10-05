@@ -9,6 +9,8 @@ lastTime = time.time()
 hdfs_client = get_hdfs_client()
 
 def saveSample(sensorID, samplePayload):
+    createdAt = time.time()
+
     payload: {
         "sensor_id": sensorID,
         "value": payload,
@@ -18,14 +20,16 @@ def saveSample(sensorID, samplePayload):
 
     sample = {
         "payload": payload,
-        "correlation_id": uuid.uuid4(),
-        "created_at": time.time(),
+        "correlation_id": str(uuid.uuid4()),
+        "created_at": createdAt,
         "schema_version": 1
     }
 
     sampleJSON = json.dumps(sample)
 
-    # save
+    timeDate = time.gmtime(createdAt)
+
+    hdfs_client.write("/data/raw/sensor_id={sample.payload}/temporal_aspect={sample.payload.temporal_aspect}/year={timeDate.tm_year}/month={timeDate.tm_month}/day={timeDate.tm_wday}/{sample.correlation_id}.json", sampleJSON, encoding="utf-8", overwrite=False)
 
 def fetchSample():
 	sensorID = random.randInt(1, 7)
