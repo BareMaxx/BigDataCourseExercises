@@ -13,7 +13,7 @@ def saveSample(sensorID, samplePayload):
 
 	payload = {
 		"sensor_id": sensorID,
-		"value": samplePayLoad,
+		"value": samplePayload,
 		"unit": "MW",
 		"temporal_aspect": "real_time"
 	}
