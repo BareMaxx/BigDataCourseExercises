@@ -11,7 +11,7 @@ hdfs_client = get_hdfs_client()
 def saveSample(sensorID, samplePayload):
 	createdAt = time.time()
 
-	payload: {
+	payload = {
 		"sensor_id": sensorID,
 		"value": payload,
 		"unit": "MW",
