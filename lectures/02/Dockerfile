@@ -1,7 +1,8 @@
 FROM python:latest
 
-# RUN pip install 
+RUN pip install hdfs
 
-ADD sensorsample.py ./
+ADD client.py .
+ADD sensorsample.py .
 
 CMD ["python", "./sensorsample.py"]
