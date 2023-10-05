@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sensor-deployment
+  labels:
+    app: sensor-deployment
+spec:
+  replicas: 6
+  selector:
+    matchLabels:
+      app: sensor-deployment
+  template:
+    metadata:
+      labels:
+        app: sensor-deployment
+    spec:
+      containers:
+      - name: sensor-deployment
+        image: # TODO: Insert image path here
+        ports:
+        - containerPort: 80
+
+
