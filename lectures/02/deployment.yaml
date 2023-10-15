@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: sensor-deployment
-        image: # TODO: Insert image path here
+        image: maxx0758/lec2sensor:latest
         ports:
         - containerPort: 80
 

@@ -8,6 +8,16 @@ from client import get_hdfs_client
 lastTime = time.time()
 hdfs_client = get_hdfs_client()
 
+haveBeenCreated = {
+	"1": False,
+	"2": False,
+	"3": False,
+	"4": False,
+	"5": False,
+	"6": False,
+	"7": False,
+}
+
 def saveSample(sensorID, samplePayload):
 	createdAt = time.time()
 
@@ -29,8 +39,12 @@ def saveSample(sensorID, samplePayload):
 
 	timeDate = time.gmtime(createdAt)
 
-	hdfs_client.write("/data/raw/sensor_id={sample.payload}/temporal_aspect={sample.payload.temporal_aspect}/year={timeDate.tm_year}/month={timeDate.tm_month}/day={timeDate.tm_wday}/{sample.correlation_id}.json", sampleJSON, encoding="utf-8", overwrite=False)
-
+	if (haveBeenCreated[str(sensorID)] == False): 
+		hdfs_client.write(f'/data4/raw/sensor_id={sample["payload"]["sensor_id"]}/temporal_aspect={sample["payload"]["temporal_aspect"]}/year={timeDate.tm_year}/month={timeDate.tm_mon}/day={timeDate.tm_wday}/sensor.json', sampleJSON, encoding="utf-8", append=False)
+		haveBeenCreated[str(sensorID)] = True
+	else:
+		hdfs_client.write(f'/data4/raw/sensor_id={sample["payload"]["sensor_id"]}/temporal_aspect={sample["payload"]["temporal_aspect"]}/year={timeDate.tm_year}/month={timeDate.tm_mon}/day={timeDate.tm_wday}/sensor.json', sampleJSON, encoding="utf-8", append=True)
+		
 def fetchSample():
 	sensorID = random.randint(1, 7)
 	samplePayload = float(decimal.Decimal(random.randrange(155, 389))/100)

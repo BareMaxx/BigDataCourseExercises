@@ -1,6 +1,6 @@
-FROM python:3.11
+FROM python:latest
 
-RUN pip install hdfs panda pyarrow fastavro
+RUN pip install hdfs
 
 ADD client.py .
 ADD sensorsample.py .
